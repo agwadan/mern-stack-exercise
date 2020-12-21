@@ -1,15 +1,15 @@
-const express = require('express');
-const cors = require('cors'); //------------------------- cors allows access to resources outside the server
-const mongoose = require('mongoose');//------------------ Assists in connection to the MongoDB.
+const express   = require('express');
+const cors      = require('cors'); //------------------------- cors allows access to resources outside the server
+const mongoose  = require('mongoose');//------------------ Assists in connection to the MongoDB.
 
 require ('dotenv').config();
 
 
-//**********CREATING THE EXPRESS SERVER************** */
+//**********CREATING THE EXPRESS SERVER******************/
 //______________________________________________________/
 
-const app = express();
-const port = process.env.PORT || 5000;
+const app   = express();
+const port  = process.env.PORT || 5000;
 
 
 /******************MIDDLEWARE ***************************/
@@ -24,14 +24,14 @@ app.use(express.json());//------------------------------- Allows parsing of JSON
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true});
 const connection = mongoose.connection;
-console.log("MOngoose... Connection to database successful.");
+console.log("Mongoose... Connection to database successful.");
 
 
-const exerciseRouter = require('./routes/exercises');
-const userRouter = require('./routes/users');
+const exerciseRouter    = require('./routes/exercises');
+const usersRouter       = require('./routes/users');
 
-app.use('./exercises', exerciseRouter);//------------------------------- Loads everything in the exercises router when the url entered includes /exercises.
-app.use('./users', userRouter);//--------------------------------------- Loads everything in the users router when the url entered includes /users.
+app.use('/exercises', exerciseRouter);//-------------------------------- Loads everything in the exercises router when the url entered includes /exercises.
+app.use('/users', usersRouter);//--------------------------------------- Loads everything in the users router when the url entered includes /users.
 
 
 /****STARTING THE SERVER**********/
