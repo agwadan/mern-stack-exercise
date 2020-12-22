@@ -39,5 +39,5 @@ app.use('/users', usersRouter);//--------------------------------------- Loads e
 
 
 app.listen(port, () => {
-    console.log(`Server running on Port : ${port}`);
+    console.log(`Sava eduka ku Port : ${port}`);
 })
