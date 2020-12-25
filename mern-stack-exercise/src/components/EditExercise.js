@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios'; 
-//import { user } from '../../backend/routes/users';
 
 class EditExercise extends Component {
 
@@ -30,10 +29,10 @@ class EditExercise extends Component {
         axios.get('http://localhost:5000/exercises/'+this.props.match.params.id)
             .then(response => {
                 this.setState({
-                    username: response.data.username,
+                    username    : response.data.username,
                     description : response.data.description,
-                    duration: response.data.duration,
-                    date: new Date(response.data.date)
+                    duration    : response.data.duration,
+                    date        : new Date(response.data.date)
                 })
             })
             .catch(function(error) {
@@ -87,6 +86,7 @@ class EditExercise extends Component {
     
         axios.post('http://localhost:5000/exercises/update/'+this.props.match.params.id, exercise)
             .then(res => console.log(res.data));
+            window.location = '/'; 
 
         
     }

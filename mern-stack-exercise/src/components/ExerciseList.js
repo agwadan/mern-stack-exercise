@@ -10,8 +10,8 @@ const Exercise = props => (
             <td>{props.exercise.duration}</td> 
             <td>{props.exercise.date.substring(0, 10)}</td> 
             <td>
-                <Link to={"/edit/" + props.exercise._id}>edit</Link> | 
-                <a href="#" onClick={() => {props.deleteExercise(props.deleteExercise._id) }} > delete</a> {/*the " _id " is the field from mongodb.*/}
+                <Link to={"/edit/" + props.exercise._id} color="white">edit</Link> | 
+                <a href="#" onClick={() => {props.deleteExercise(props.exercise._id) }} > delete</a> {/*the " _id " is the field from mongodb.*/}
             </td>
         </tr>
     );
@@ -41,6 +41,7 @@ class ExerciseList extends Component {
     /* -------------FUNCTION TO DISPLAY EACH EXERCISE----------------------------*/
     exerciseList(){
         return this.state.exercises.map(currentexercise => {
+            
             return<Exercise
                 exercise        = {currentexercise}
                 deleteExercise  = {this.deleteExercise} 
@@ -62,7 +63,7 @@ class ExerciseList extends Component {
         return (
             <div>
                 <h3>Exercise List</h3>
-                <table className="table table-dark table-striped table-borderless table-hover">
+                <table className="table table-light table-striped table-borderless table-hover">
                     <thead className="thead-dark">
                         <tr>
                             <th>Username</th>
