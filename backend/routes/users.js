@@ -3,7 +3,7 @@ let User = require('../models/user.model');
 
 
 /***********The code below handles incoming http GET requests**************/
-//____________________________________________________________________/
+//________________________________________________________________________/
 
 
 router.route('/').get((req, res) => {
@@ -13,8 +13,9 @@ router.route('/').get((req, res) => {
 });
 
 
-/***********The code below handles incoming http POST requests**************/
-//_________________________________________________________________________/
+/***********The code below handles incoming http POST requests
+ * *************** to add users to the database**************/
+//___________________________________________________________/
 
 router.route('/add').post((req, res) => {
     const username = req.body.username;
