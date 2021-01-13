@@ -7,10 +7,12 @@ class CreateUser extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this. onChangePassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: ''
+      username: '',
+      password : ''
     }
   }
 
@@ -20,17 +22,25 @@ class CreateUser extends Component {
     })
   }
 
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    })
+  }
+
   onSubmit(e) {
     e.preventDefault(); //--------------------- Prevents the forms from being handled the default way html does it.
     const user = {
       username: this.state.username,
+      password : this.state.password
     }
     console.log(user);
     axios.post('http://localhost:5000/users/add', user)
       .then(res => console.log(res.data));
 
     this.setState({ //------------------------- Resetting the username to nothing after the submission has been done.
-      username: ''
+      username: '',
+      password:''
     })
   }
 
@@ -38,11 +48,9 @@ class CreateUser extends Component {
     return (
       <div>
         <h3>Create New User</h3>
-
         <form onSubmit={this.onSubmit}>
           <div className=" form-group">
             <label>Username: </label>
-
             <input
               type='text'
               required
@@ -50,19 +58,16 @@ class CreateUser extends Component {
               value={this.state.username}
               onChange={this.onChangeUsername}
             />
-
-            
-
           </div>
 
-          <div className= 'form-group'>
-          <label>Password: </label>
+          <div className='form-group'>
+            <label>Password: </label>
             <input
               type='password'
               required
               className='form-control'
-              value={this.state.username}
-              onChange={this.onChangeUsername}
+              value={this.state.password}
+              onChange={this.onChangePassword}
             />
           </div>
 
