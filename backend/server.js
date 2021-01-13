@@ -1,6 +1,6 @@
 const express   = require('express');
 const cors      = require('cors'); //------------------------- cors allows access to resources outside the server
-const mongoose  = require('mongoose');//------------------ Assists in connection to the MongoDB.
+const mongoose  = require('mongoose');//---------------------- Assists in connection to the MongoDB.
 
 require ('dotenv').config();
 
