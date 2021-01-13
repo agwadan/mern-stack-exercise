@@ -12,6 +12,12 @@ const userSchema = new Schema ({
         unique      : true, 
         trim        : true, //---------------------------------------- Trims off whitespaces at the end incase the user types in some extra unnecessary spaces
         minlength   : 3//---------------------------------------- Has to be atleast three characters long.
+    } ,
+
+    password: {
+        type : String,
+        required : true,
+        minlength : 8
     }
 
 }, {
