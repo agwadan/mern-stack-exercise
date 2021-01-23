@@ -3,9 +3,7 @@
 
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;//----------------------------- new Schema is created as an instance of mongoose.schema 
-
-const userSchema = new Schema ({
+const userSchema = new mongoose.Schema ({
     username: {
         type        : String, 
         required    : true,
