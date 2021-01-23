@@ -40,7 +40,6 @@ app.use('/users', usersRouter);//--------------------------------------- Loads e
 /****STARTING THE SERVER**********/
 //___________________________________________________________/
 
-
 app.listen(port, () => {
     console.log(`Sava eduka ku Port : ${port}`);
 })
