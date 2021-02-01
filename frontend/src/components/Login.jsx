@@ -11,15 +11,15 @@ export default function Login() {
 
         <div className='form-group'>
           <label>Name</label>
-          <input type='text' />
+          <input className='form-control' type='text' />
         </div>
 
         <div className='form-group'>
           <label>Password</label>
-          <input type='text' />
+          <input className='form-control' type='text' />
         </div>
 
-        <button className='btn btn-primary' type='submit'>Sign Up</button>
+        <button className='btn btn-primary' type='submit'>Log In</button>
 
       </form>
     </div>
