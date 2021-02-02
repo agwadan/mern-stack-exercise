@@ -37,9 +37,10 @@ class CreateUser extends Component {
 
   onSubmit(e) {
     e.preventDefault(); //--------------------- Prevents the forms from being handled the default way html does it.
+
     const user = {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.passwordTwo
     }
     console.log(user);
     axios.post('http://localhost:5000/users/add', user)
@@ -87,6 +88,11 @@ class CreateUser extends Component {
               value={this.state.passwordTwo}
               onChange={this.onChangePasswordTwo}
             />
+          </div>
+
+          <div className='form-group'>
+            <label>Upload Profile Picture</label>
+            <input type='file' name='photo' />
           </div>
 
           <div className='form-group'>
