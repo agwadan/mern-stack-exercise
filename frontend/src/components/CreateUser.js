@@ -7,12 +7,14 @@ class CreateUser extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this. onChangePassword.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangePasswordTwo = this.onChangePasswordTwo.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: '',
-      password : ''
+      password: '',
+      passwordTwo: ''
     }
   }
 
@@ -27,12 +29,18 @@ class CreateUser extends Component {
       password: e.target.value
     })
   }
+  onChangePasswordTwo(e) {
+    this.setState({
+      passwordTwo: e.target.value
+    })
+  }
 
   onSubmit(e) {
     e.preventDefault(); //--------------------- Prevents the forms from being handled the default way html does it.
+
     const user = {
       username: this.state.username,
-      password : this.state.password
+      password: this.state.passwordTwo
     }
     console.log(user);
     axios.post('http://localhost:5000/users/add', user)
@@ -40,7 +48,7 @@ class CreateUser extends Component {
 
     this.setState({ //------------------------- Resetting the username to nothing after the submission has been done.
       username: '',
-      password:''
+      password: ''
     })
   }
 
@@ -50,7 +58,7 @@ class CreateUser extends Component {
         <h3>Create New User</h3>
         <form onSubmit={this.onSubmit}>
           <div className=" form-group">
-            <label>Username: </label>
+            <label>Username </label>
             <input
               type='text'
               required
@@ -61,7 +69,7 @@ class CreateUser extends Component {
           </div>
 
           <div className='form-group'>
-            <label>Password: </label>
+            <label>Password </label>
             <input
               type='password'
               required
@@ -69,6 +77,22 @@ class CreateUser extends Component {
               value={this.state.password}
               onChange={this.onChangePassword}
             />
+          </div>
+
+          <div className='form-group'>
+            <label>Confirm Password </label>
+            <input
+              type='password'
+              required
+              className='form-control'
+              value={this.state.passwordTwo}
+              onChange={this.onChangePasswordTwo}
+            />
+          </div>
+
+          <div className='form-group'>
+            <label>Upload Profile Picture</label>
+            <input type='file' name='photo' />
           </div>
 
           <div className='form-group'>
