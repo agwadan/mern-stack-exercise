@@ -18,6 +18,12 @@ class CreateUser extends Component {
     }
   }
 
+  onChangeValue(name, e) {
+    this.setState({
+      name: e.value.target
+    })
+  }
+
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
@@ -50,6 +56,8 @@ class CreateUser extends Component {
       username: '',
       password: ''
     })
+
+    console.log(user);
   }
 
   render() {
@@ -64,7 +72,7 @@ class CreateUser extends Component {
               required
               className='form-control'
               value={this.state.username}
-              onChange={this.onChangeUsername}
+              onChange={this.onChangeValue}
             />
           </div>
 

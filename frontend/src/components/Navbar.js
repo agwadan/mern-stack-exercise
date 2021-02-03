@@ -5,12 +5,12 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
-        <Link to="/" className="navbar-brand">Exercise Tracker</Link>
+        <Link to="/exercises" className="navbar-brand">Exercise Tracker</Link>
 
         <div className="collpse navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="navbar-item">
-              <Link to="/" className="nav-link">Exercises</Link>
+              <Link to="/exercises" className="nav-link">Exercises</Link>
             </li>
 
             <li className="navbar-item">
