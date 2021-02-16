@@ -9,12 +9,14 @@ class CreateUser extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangePasswordTwo = this.onChangePasswordTwo.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: '',
       password: '',
-      passwordTwo: ''
+      passwordTwo: '',
+      image: null
     }
   }
 
@@ -41,12 +43,19 @@ class CreateUser extends Component {
     })
   }
 
+  onChangeImage(e) {
+    this.setState({
+      image: e.target.files
+    })
+  }
+
   onSubmit(e) {
     e.preventDefault(); //--------------------- Prevents the forms from being handled the default way html does it.
 
     const user = {
       username: this.state.username,
-      password: this.state.passwordTwo
+      password: this.state.passwordTwo,
+      image: this.state.image
     }
     console.log(user);
     axios.post('http://localhost:5000/users/add', user)
@@ -54,7 +63,9 @@ class CreateUser extends Component {
 
     this.setState({ //------------------------- Resetting the username to nothing after the submission has been done.
       username: '',
-      password: ''
+      password: '',
+      passwordTwo: '',
+      image: null
     })
 
     console.log(user);
@@ -72,7 +83,7 @@ class CreateUser extends Component {
               required
               className='form-control'
               value={this.state.username}
-              onChange={this.onChangeValue}
+              onChange={this.onChangeUsername}
             />
           </div>
 
@@ -99,8 +110,8 @@ class CreateUser extends Component {
           </div>
 
           <div className='form-group'>
-            <label>Upload Profile Picture</label>
-            <input type='file' name='photo' />
+            <label>Upload Profile Picture <br /></label>
+            <input type='file' name='photo' onChange={this.onChangeImage} />
           </div>
 
           <div className='form-group'>
