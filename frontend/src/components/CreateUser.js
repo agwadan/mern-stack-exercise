@@ -7,20 +7,30 @@ class CreateUser extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangePasswordTwo = this.onChangePasswordTwo.bind(this);
+    this.onChangeImage = this.onChangeImage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: '',
+      email: '',
       password: '',
-      passwordTwo: ''
+      passwordTwo: '',
+      image: null
     }
   }
 
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
+    })
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
     })
   }
 
@@ -35,12 +45,20 @@ class CreateUser extends Component {
     })
   }
 
+  onChangeImage(e) {
+    this.setState({
+      image: e.target.files
+    })
+  }
+
   onSubmit(e) {
     e.preventDefault(); //--------------------- Prevents the forms from being handled the default way html does it.
 
     const user = {
       username: this.state.username,
-      password: this.state.passwordTwo
+      email: this.state.email,
+      password: this.state.passwordTwo,
+      //image: this.state.image
     }
     console.log(user);
     axios.post('http://localhost:5000/users/add', user)
@@ -48,8 +66,13 @@ class CreateUser extends Component {
 
     this.setState({ //------------------------- Resetting the username to nothing after the submission has been done.
       username: '',
-      password: ''
+      email: '',
+      password: '',
+      passwordTwo: '',
+      image: null
     })
+
+    console.log(user);
   }
 
   render() {
@@ -65,6 +88,17 @@ class CreateUser extends Component {
               className='form-control'
               value={this.state.username}
               onChange={this.onChangeUsername}
+            />
+          </div>
+
+          <div className=" form-group">
+            <label>Email </label>
+            <input
+              type='text'
+              required
+              className='form-control'
+              value={this.state.email}
+              onChange={this.onChangeEmail}
             />
           </div>
 
@@ -90,10 +124,10 @@ class CreateUser extends Component {
             />
           </div>
 
-          <div className='form-group'>
-            <label>Upload Profile Picture</label>
-            <input type='file' name='photo' />
-          </div>
+          {/*  <div className='form-group'>
+            <label>Upload Profile Picture <br /></label>
+            <input type='file' name='photo' onChange={this.onChangeImage} />
+          </div> */}
 
           <div className='form-group'>
             <input type='submit' value='Create User' className='btn btn-primary' />
