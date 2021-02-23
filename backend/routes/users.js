@@ -39,11 +39,20 @@ router.route('/').get((req, res) => {
 router.route('/add').post(upload.single('image'), (req, res, next) => {
   const username = req.body.username;
 
+  const email = req.body.email;
+  const nameRegEx = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  if (!nameRegEx.test(email)) {
+    return res.send('wrong email...');
+  }
+  console.log(nameRegEx.test(email));
+
   const salt = bcrypt.genSaltSync(saltRounds);
   const password = bcrypt.hashSync(req.body.password, salt);
   const newUser = new User({
     username,
+    email,
     password,
+
     /*  img: {
        data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
        contentType: 'image/png'
@@ -51,7 +60,7 @@ router.route('/add').post(upload.single('image'), (req, res, next) => {
   });
   console.log(username);
   console.log(password);
-  console.log(req.file.filename);
+  //console.log(req.file.filename);
   newUser.save()
     .then(() => res.json('User added  :-)'))
     .catch(err => res.status(400).json('Error: ' + err));

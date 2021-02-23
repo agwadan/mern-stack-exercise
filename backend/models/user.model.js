@@ -11,6 +11,14 @@ const userSchema = new mongoose.Schema({
         minlength: 3//---------------------------------------- Has to be atleast three characters long.
     },
 
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true, //---------------------------------------- Trims off whitespaces at the end incase the user types in some extra unnecessary spaces
+        minlength: 3//---------------------------------------- Has to be atleast three characters long.
+    },
+
     password: {
         type: String,
         required: true,

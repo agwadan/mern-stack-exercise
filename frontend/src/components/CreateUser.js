@@ -7,6 +7,7 @@ class CreateUser extends Component {
     super(props);
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangePasswordTwo = this.onChangePasswordTwo.bind(this);
     this.onChangeImage = this.onChangeImage.bind(this);
@@ -14,21 +15,22 @@ class CreateUser extends Component {
 
     this.state = {
       username: '',
+      email: '',
       password: '',
       passwordTwo: '',
       image: null
     }
   }
 
-  onChangeValue(name, e) {
-    this.setState({
-      name: e.value.target
-    })
-  }
-
   onChangeUsername(e) {
     this.setState({
       username: e.target.value
+    })
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
     })
   }
 
@@ -54,8 +56,9 @@ class CreateUser extends Component {
 
     const user = {
       username: this.state.username,
+      email: this.state.email,
       password: this.state.passwordTwo,
-      image: this.state.image
+      //image: this.state.image
     }
     console.log(user);
     axios.post('http://localhost:5000/users/add', user)
@@ -63,6 +66,7 @@ class CreateUser extends Component {
 
     this.setState({ //------------------------- Resetting the username to nothing after the submission has been done.
       username: '',
+      email: '',
       password: '',
       passwordTwo: '',
       image: null
@@ -84,6 +88,17 @@ class CreateUser extends Component {
               className='form-control'
               value={this.state.username}
               onChange={this.onChangeUsername}
+            />
+          </div>
+
+          <div className=" form-group">
+            <label>Email </label>
+            <input
+              type='text'
+              required
+              className='form-control'
+              value={this.state.email}
+              onChange={this.onChangeEmail}
             />
           </div>
 
@@ -109,10 +124,10 @@ class CreateUser extends Component {
             />
           </div>
 
-          <div className='form-group'>
+          {/*  <div className='form-group'>
             <label>Upload Profile Picture <br /></label>
             <input type='file' name='photo' onChange={this.onChangeImage} />
-          </div>
+          </div> */}
 
           <div className='form-group'>
             <input type='submit' value='Create User' className='btn btn-primary' />
