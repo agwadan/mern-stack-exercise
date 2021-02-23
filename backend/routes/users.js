@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -35,22 +36,22 @@ router.route('/').get((req, res) => {
  * *************** to add users to the database**************/
 //___________________________________________________________/
 
-router.route('/add', upload.single('image')).post((req, res) => {
+router.route('/add').post(upload.single('image'), (req, res, next) => {
   const username = req.body.username;
-  //const password = req.body.password;
 
   const salt = bcrypt.genSaltSync(saltRounds);
   const password = bcrypt.hashSync(req.body.password, salt);
   const newUser = new User({
     username,
     password,
-    img: {
-      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-      contentType: 'image/png'
-    }
+    /*  img: {
+       data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+       contentType: 'image/png'
+     } */
   });
   console.log(username);
   console.log(password);
+  console.log(req.file.filename);
   newUser.save()
     .then(() => res.json('User added  :-)'))
     .catch(err => res.status(400).json('Error: ' + err));
