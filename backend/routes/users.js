@@ -7,16 +7,23 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads')
+const express = require('express');
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+const storageVar = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
   },
-  filename: (req, file, cb) => {
-    cb(null, file.fieldname + '-' + Date.now())
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
   }
 });
-const upload = multer({ storage: storage });
-const imgModel = require('../models/image.model');
+
+const upload = multer({ storage: storageVar })
 
 const saltRounds = 10;
 
@@ -36,7 +43,8 @@ router.route('/').get((req, res) => {
  * *************** to add users to the database**************/
 //___________________________________________________________/
 
-router.route('/add').post(upload.single('image'), (req, res, next) => {
+router.route('/add').post(upload.single('img'), (req, res, next) => {
+  console.log(req.file);
   const username = req.body.username;
 
   const email = req.body.email;
@@ -44,7 +52,6 @@ router.route('/add').post(upload.single('image'), (req, res, next) => {
   if (!nameRegEx.test(email)) {
     return res.send('wrong email...');
   }
-  console.log(nameRegEx.test(email));
 
   const salt = bcrypt.genSaltSync(saltRounds);
   const password = bcrypt.hashSync(req.body.password, salt);
@@ -53,10 +60,10 @@ router.route('/add').post(upload.single('image'), (req, res, next) => {
     email,
     password,
 
-    /*  img: {
-       data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-       contentType: 'image/png'
-     } */
+    img: req.file.path/* 'Dr.Charles.image' *//* {
+      data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+      contentType: 'image/png'
+    } */
   });
   console.log(username);
   console.log(password);
@@ -80,4 +87,4 @@ router.route('/login').post((req, res) => {
     });
 })
 
-module.exports = router; 
+module.exports = router;
