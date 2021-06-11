@@ -53,14 +53,16 @@ router.route('/add').post(upload.single('img'), (req, res, next) => {
     return res.send('wrong email...');
   }
 
+  const img = req.file.path;
+
   const salt = bcrypt.genSaltSync(saltRounds);
   const password = bcrypt.hashSync(req.body.password, salt);
   const newUser = new User({
     username,
     email,
     password,
-
-    img: req.file.path/* 'Dr.Charles.image' *//* {
+    img: img
+    /* 'Dr.Charles.image' *//* {
       data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
       contentType: 'image/png'
     } */

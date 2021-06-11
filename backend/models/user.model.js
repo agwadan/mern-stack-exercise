@@ -25,8 +25,9 @@ const userSchema = new mongoose.Schema({
         minlength: 8
     },
     img: {
-        data: Buffer,
-        contentType: String
+        type: String
+        /* data: Buffer,
+        contentType: String */
     }
 
 }, {
