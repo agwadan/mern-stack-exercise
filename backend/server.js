@@ -28,8 +28,8 @@ mongoose.connect(uri, {
     useUnifiedTopology: true
 });
 
-console.log("Mongoose... Connection to database successful.");
-
+console.log('\n-----------------------------------------------------------');
+console.log("\tMongoose... Connection to db successful.\n-----------------------------------------------------------");
 
 const exerciseRouter = require('./routes/exercises');
 const usersRouter = require('./routes/users');
@@ -41,5 +41,5 @@ app.use('/users', usersRouter);//--------------------------------------- Loads e
 //___________________________________________________________/
 
 app.listen(port, () => {
-    console.log(`Sava eduka ku Port : ${port}`);
+    console.log(`\tSava eduka ku Port : ${port}\n-----------------------------------------------------------\n`);
 })
