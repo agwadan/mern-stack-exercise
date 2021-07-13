@@ -142,4 +142,4 @@ class CreateExercise extends Component {
   }
 }
 
-export default CreateExercise; 
+export default CreateExercise;

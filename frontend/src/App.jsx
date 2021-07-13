@@ -10,19 +10,19 @@ import UserList from './components/UserList'
 import Login from './components/Login';
 
 function App() {
+  console.log('App running');
   return (
     <Router>
       <div className='container'>
         <NavBar />
         <br />
-        <Route path='/' exact component={Login} />
+        <Route path='/' exact component={ExerciseList} />
         <Route path='/exercises' exact component={ExerciseList} />
         <Route path='/edit/:id' exact component={EditExercise} />
         <Route path='/create' exact component={CreateExercise} />
         <Route path='/user' exact component={CreateUser} />
         <Route path='/users' exact component={UserList} />
       </div>
-
     </Router>
   );
 }
